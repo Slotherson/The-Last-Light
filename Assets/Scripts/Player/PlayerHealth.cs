@@ -11,11 +11,11 @@ public class PlayerHealth : Singleton<PlayerHealth>
 
     [SerializeField] private Sprite fullHeartImage, emptyHeartImage, noHeartImage;
     [SerializeField] private int maxHealth = 3;
+    [SerializeField] private int maxPossibleHealth = 3;
     [SerializeField] private float knockBackThrustAmount = 10;
     [SerializeField] private float damageRecoveryTime = 1f;
 
     private Transform heartContainer;
-    private int maxPossibleHealth = 10;
     private int currentHealth;
     private bool canTakeDamage = true;
 

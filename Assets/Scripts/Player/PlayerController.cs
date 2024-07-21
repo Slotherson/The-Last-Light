@@ -77,8 +77,8 @@ public class PlayerController : Singleton<PlayerController>
     {
         movement = playerControls.Movement.Move.ReadValue<Vector2>();
 
-        anim.SetFloat("moveX", movement.x);
-        anim.SetFloat("moveY", movement.y);
+        anim.SetFloat("MoveX", movement.x);
+        anim.SetFloat("MoveY", movement.y);
 
         anim.SetBool(EQUIPPED_HASH, WeaponEquipped);
     }
@@ -109,10 +109,14 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Dash()
     {
-        isDashing = true;
-        moveSpeed *= dashSpeed;
-        myTrailRenderer.emitting = true;
-        StartCoroutine(EndDashRoutine());
+        if (!isDashing && Stamina.Instance.CurrentStamina > 0)
+        {
+            isDashing = true;
+            moveSpeed *= dashSpeed;
+            myTrailRenderer.emitting = true;
+            Stamina.Instance.UseStamina();
+            StartCoroutine(EndDashRoutine());
+        }
     }
 
     private IEnumerator EndDashRoutine()
